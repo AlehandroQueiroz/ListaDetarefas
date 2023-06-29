@@ -7,6 +7,9 @@ export default function Home(){
 
         const [tarefas, setTarefas] = useState<string[]>([]);
         const [novaTarefa, setNovaTarefa] = useState('');
+        const [criadas, setCriadas] = useState(0);
+        const [concluidas, setConcluidas] = useState(0);
+
            
 {/*FUNÇÕES*/}
 
@@ -14,30 +17,36 @@ export default function Home(){
             if(tarefas.includes(novaTarefa)){
                 return Alert.alert('Tafera repetida', 'Você já adicionou essa tarefa');
             }
+
+            if(novaTarefa === ''){
+                return Alert.alert('Preencha o Campo', 'Você não preencheu o campo abaixo');
+            }
             
             setTarefas(prevState => [...prevState, novaTarefa]);
             setNovaTarefa('');
+            setCriadas(criadas + 1);
         }
 
         function removerTarefa(nomeTarefa: string){
 
-       //return console.log(tarefas.filter((item) => item !== nomeTarefa))
-
-       //setTarefas(prevState => prevState.filter((item) => item !== nomeTarefa))
-
-       
-                        
-
             Alert.alert('Excluir', `Você temcerteza que deseja excluir essa tarefa: ${nomeTarefa}`, [
                 {
                     text: 'Sim',
-                    onPress: () => setTarefas(prevState => prevState.filter((item) => item !== nomeTarefa))
+                    onPress: () => setTarefas(prevState => prevState.filter((item) => item !== nomeTarefa))                    
                 },
                 {
                     text: 'Não',
                     style: 'cancel'
                 }
             ])            
+        }
+
+        function contCriadas(){
+            setCriadas(criadas + 1);
+        }
+
+        function contConcluidas() {
+            setConcluidas(concluidas + 1);
         }
 
     return(
@@ -72,14 +81,14 @@ export default function Home(){
             <View style={style.viewSubContador}>
                 <Text style={style.textContador1}>Criadas</Text>
                     <View style={style.bordaText}>
-                        <Text style={style.textContadorNumber}>0</Text>
+                        <Text style={style.textContadorNumber}>{criadas}</Text>
                     </View>
             </View>
 
             <View style={style.viewSubContador2}>
                 <Text style={style.textContador2}>Concluídas</Text>
                     <View style={style.bordaText}>
-                        <Text style={style.textContadorNumber}>0</Text>
+                        <Text style={style.textContadorNumber}>{concluidas}</Text>
                     </View>
             </View>
         </View>

@@ -45,9 +45,13 @@ export default function Home(){
             setCriadas(criadas + 1);
         }
 
-        function contConcluidas() {
-            setConcluidas(concluidas + 1);
-        }
+        function contConcluidas(checked: boolean) {
+            if(checked) {
+              setConcluidas(concluidas + 1);
+            } else {
+              setConcluidas(concluidas - 1);
+            }
+          }
 
     return(
         <View style={style.container}>
@@ -104,7 +108,9 @@ export default function Home(){
                 <Tarefas 
                     key={item}
                     tarefaDoDia={item} 
-                    onRemove={() => removerTarefa(item)}/>
+                    onRemove={() => removerTarefa(item)}
+                    onCheck={(checked) => contConcluidas(checked)}
+                    />
         )}
 
         showsVerticalScrollIndicator={false}

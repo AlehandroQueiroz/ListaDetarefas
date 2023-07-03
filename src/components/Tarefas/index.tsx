@@ -6,21 +6,19 @@ import { useState } from "react";
 type Props = {
   tarefaDoDia: string;
   onRemove: () => void;
+  onCheck: (checked: boolean) => void;
 }
 
-export function Tarefas({tarefaDoDia, onRemove}: Props){
+export function Tarefas({tarefaDoDia, onRemove, onCheck}: Props){
 
   const [isChecked, setChecked] = useState(false);
   const [concluidas, setConcluidas] = useState(0);
 
-  
-  function contConcluidas() {
-    if(isChecked == true) {
-    setConcluidas(concluidas + 1);
-    return console.log({concluidas});
-  }
-}
 
+  function contConcluidas() {
+    setChecked(!isChecked)
+    onCheck(!isChecked)
+}
   return(
     <View style={style.container}>
         <View style={style.containerStyleCheckBox}>
@@ -30,7 +28,7 @@ export function Tarefas({tarefaDoDia, onRemove}: Props){
             checkedIcon="check-circle"
             uncheckedIcon="circle-o"
             checked={isChecked}
-            onPress={() => setChecked(!isChecked)}      
+            onPress={contConcluidas}      
             size={25}
             />
         </View>

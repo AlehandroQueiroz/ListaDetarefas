@@ -24,7 +24,7 @@ export const style = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: "center",
-    height: 80,
+    height: 56,
     position: "absolute",
     top: 0,
     left: 0,
